@@ -21,94 +21,188 @@ local options = {
     type = "group",
     args = {
 
-        layoutsModule = {
-            name = "Enable Auto Layouts",
-            type = "toggle",
-            width = "full",
-            order = 0,
-            get = function()
-                return DynamicGroupLayout:GetOption("layoutsModule")
-            end,
-            set = function(info, value)
-                DynamicGroupLayout:SetOption("layoutsModule", value)
-                ReloadUI()
-            end,
-            confirm = "ConfirmReload"
-        },
-        group5Layout = {
-            name = "Party Layout",
-            type = "select",
-            width = "full",
+        general = {
+            name = "General",
+            type = "group",
             order = 1,
-            handler = Layouts,
-            values = "List",
-            style = "dropdown",
-            get = function()
-                return DynamicGroupLayout:GetOption("group5Layout")
-            end,
-            set = function(info, value)
-                DynamicGroupLayout:SetOption("group5Layout", value)
-            end
+            args = {
+
+                layoutsModule = {
+                    name = "Enable Auto Layouts",
+                    type = "toggle",
+                    width = "full",
+                    order = 1,
+                    get = function()
+                        return DynamicGroupLayout:GetOption("layoutsModule")
+                    end,
+                    set = function(info, value)
+                        DynamicGroupLayout:SetOption("layoutsModule", value)
+                        ReloadUI()
+                    end,
+                    confirm = "ConfirmReload"
+                },
+
+                notify = {
+                    name = "Notify layout changes",
+                    type = "toggle",
+                    width = "full",
+                    order = 2,
+                    get = function()
+                        return DynamicGroupLayout:GetOption("notify")
+                    end,
+                    set = function(info, value)
+                        DynamicGroupLayout:SetOption("notify", value)
+                    end
+                },
+            },
         },
-        group10Layout = {
-            name = "Raid Layout (10)",
-            type = "select",
-            width = "full",
+
+        pve = {
+            name = "PvE Layouts",
+            type = "group",
             order = 2,
-            handler = Layouts,
-            values = "List",
-            style = "dropdown",
-            get = function()
-                return DynamicGroupLayout:GetOption("group10Layout")
-            end,
-            set = function(info, value)
-                DynamicGroupLayout:SetOption("group10Layout", value)
-            end
+            args = {
+
+                group5Layout = {
+                    name = "Party Layout",
+                    type = "select",
+                    width = "full",
+                    order = 1,
+                    handler = Layouts,
+                    values = "List",
+                    style = "dropdown",
+                    get = function()
+                        return DynamicGroupLayout:GetOption("group5Layout")
+                    end,
+                    set = function(info, value)
+                        DynamicGroupLayout:SetOption("group5Layout", value)
+                    end
+                },
+
+                group10Layout = {
+                    name = "Raid Layout (10)",
+                    type = "select",
+                    width = "full",
+                    order = 2,
+                    handler = Layouts,
+                    values = "List",
+                    style = "dropdown",
+                    get = function()
+                        return DynamicGroupLayout:GetOption("group10Layout")
+                    end,
+                    set = function(info, value)
+                        DynamicGroupLayout:SetOption("group10Layout", value)
+                    end
+                },
+
+                group25Layout = {
+                    name = "Raid Layout (25)",
+                    type = "select",
+                    width = "full",
+                    order = 3,
+                    handler = Layouts,
+                    values = "List",
+                    style = "dropdown",
+                    get = function()
+                        return DynamicGroupLayout:GetOption("group25Layout")
+                    end,
+                    set = function(info, value)
+                        DynamicGroupLayout:SetOption("group25Layout", value)
+                    end
+                },
+
+                group40Layout = {
+                    name = "Raid Layout (40)",
+                    type = "select",
+                    width = "full",
+                    order = 4,
+                    handler = Layouts,
+                    values = "List",
+                    style = "dropdown",
+                    get = function()
+                        return DynamicGroupLayout:GetOption("group40Layout")
+                    end,
+                    set = function(info, value)
+                        DynamicGroupLayout:SetOption("group40Layout", value)
+                    end
+                },
+            },
         },
-        group25Layout = {
-            name = "Raid Layout (25)",
-            type = "select",
-            width = "full",
+
+        pvp = {
+            name = "PvP Layouts",
+            type = "group",
             order = 3,
-            handler = Layouts,
-            values = "List",
-            style = "dropdown",
-            get = function()
-                return DynamicGroupLayout:GetOption("group25Layout")
-            end,
-            set = function(info, value)
-                DynamicGroupLayout:SetOption("group25Layout", value)
-            end
+            args = {
+
+                arenaLayout = {
+                    name = "Arena Layout",
+                    type = "select",
+                    width = "full",
+                    order = 1,
+                    handler = Layouts,
+                    values = "List",
+                    style = "dropdown",
+                    get = function()
+                        return DynamicGroupLayout:GetOption("arenaLayout")
+                    end,
+                    set = function(info, value)
+                        DynamicGroupLayout:SetOption("arenaLayout", value)
+                    end
+                },
+
+                bg10Layout = {
+                    name = "BG Layout (10)",
+                    type = "select",
+                    width = "full",
+                    order = 2,
+                    handler = Layouts,
+                    values = "List",
+                    style = "dropdown",
+                    get = function()
+                        return DynamicGroupLayout:GetOption("bg10Layout")
+                    end,
+                    set = function(info, value)
+                        DynamicGroupLayout:SetOption("bg10Layout", value)
+                    end
+                },
+
+                bg15Layout = {
+                    name = "BG Layout (15)",
+                    type = "select",
+                    width = "full",
+                    order = 3,
+                    handler = Layouts,
+                    values = "List",
+                    style = "dropdown",
+                    get = function()
+                        return DynamicGroupLayout:GetOption("bg15Layout")
+                    end,
+                    set = function(info, value)
+                        DynamicGroupLayout:SetOption("bg15Layout", value)
+                    end
+                },
+
+                epicBGLayout = {
+                    name = "Epic BG Layout (35–40)",
+                    type = "select",
+                    width = "full",
+                    order = 4,
+                    handler = Layouts,
+                    values = "List",
+                    style = "dropdown",
+                    get = function()
+                        return DynamicGroupLayout:GetOption("epicBGLayout")
+                    end,
+                    set = function(info, value)
+                        DynamicGroupLayout:SetOption("epicBGLayout", value)
+                    end
+                },
+            },
         },
-        group40Layout = {
-            name = "Raid Layout (40)",
-            type = "select",
-            width = "full",
-            order = 4,
-            handler = Layouts,
-            values = "List",
-            style = "dropdown",
-            get = function()
-                return DynamicGroupLayout:GetOption("group40Layout")
-            end,
-            set = function(info, value)
-                DynamicGroupLayout:SetOption("group40Layout", value)
-            end
-        },
-        notify = {
-            name = "Notify layout changes",
-            type = "toggle",
-            width = "full",
-            order = 5,
-            get = function()
-                return DynamicGroupLayout:GetOption("notify")
-            end,
-            set = function(info, value)
-                DynamicGroupLayout:SetOption("notify", value)
-            end
-        }
-    }
+    },
 }
+
 
 
 local defaults = {
@@ -119,6 +213,10 @@ local defaults = {
         group10Layout = 0,
         group25Layout = 0,
         group40Layout = 0,
+        arenaLayout = 0,
+        bg10Layout = 0,
+        bg15Layout = 0,
+        epicBGLayout = 0,
         notify = true
     }
 }
@@ -365,6 +463,10 @@ function Layouts:Update()
     self.group10Layout = DynamicGroupLayout:GetOption("group10Layout")
     self.group25Layout = DynamicGroupLayout:GetOption("group25Layout")
     self.group40Layout = DynamicGroupLayout:GetOption("group40Layout")
+    self.arenaLayout = DynamicGroupLayout:GetOption("arenaLayout")
+    self.bg10Layout = DynamicGroupLayout:GetOption("bg10Layout")
+    self.bg15Layout = DynamicGroupLayout:GetOption("bg15Layout")
+    self.epicBGLayout = DynamicGroupLayout:GetOption("epicBGLayout")
 end
 
 function Layouts:Activate(layout)
@@ -414,21 +516,43 @@ function Layouts:List()
 end
 
 function Layouts:Evaluate(event, ...)
+    local inInstance, instanceType = IsInInstance()
+    local members = GetNumGroupMembers()
+    local isRaid = IsInRaid()
+    local isGroup = IsInGroup()
+
     if not self:CanChange() then
         return
     end
     local newLayout = self.defaultLayout
 
-    if IsInGroup() or IsInRaid() then
-        local members = GetNumGroupMembers()
+    -- Arena
+    if inInstance and instanceType == "arena" then
+        if self.arenaLayout ~= 0 and self:Has(self.arenaLayout) then
+            newLayout = self.arenaLayout
+        end
 
-        if members <= 5 and self.group5Layout and self:Has(self.group5Layout) then
+        -- Battlegrounds
+    elseif inInstance and instanceType == "pvp" then
+        if members <= 10 and self.bg10Layout ~= 0 then
+            newLayout = self.bg10Layout
+        elseif members <= 15 and self.bg15Layout ~= 0 then
+            newLayout = self.bg15Layout
+        elseif members >= 35 and self.epicBGLayout ~= 0 then
+            newLayout = self.epicBGLayout
+        end
+
+        -- World / PvE
+    elseif isGroup and not isRaid then
+        if self.group5Layout ~= 0 then
             newLayout = self.group5Layout
-        elseif members <= 10 and self.group10Layout and self:Has(self.group10Layout) then
+        end
+    elseif isRaid then
+        if members <= 10 and self.group10Layout ~= 0 then
             newLayout = self.group10Layout
-        elseif members <= 25 and self.group25Layout and self:Has(self.group25Layout) then
+        elseif members <= 25 and self.group25Layout ~= 0 then
             newLayout = self.group25Layout
-        elseif members <= 40 and self.group40Layout and self:Has(self.group40Layout) then
+        elseif members <= 40 and self.group40Layout ~= 0 then
             newLayout = self.group40Layout
         end
     end
