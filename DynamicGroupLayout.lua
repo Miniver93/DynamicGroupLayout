@@ -103,18 +103,18 @@ local defaults = {
     profile = {
         -- Layouts Module
         layoutsModule = true,
-        group5Layout = nil,
-        group10Layout = nil,
-        group25Layout = nil,
-        group40Layout = nil,
+        group5Layout = 0,
+        group10Layout = 0,
+        group25Layout = 0,
+        group40Layout = 0,
     }
 }
 
 function DynamicGroupLayout:OnInitialize()
+    self.database = LibStub("AceDB-3.0"):New("DGLDB", defaults, true)
     LibStub("AceConfig-3.0"):RegisterOptionsTable("DynamicGroupLayout", options)
     LibStub("AceConfigDialog-3.0"):AddToBlizOptions("DynamicGroupLayout", "DynamicGroupLayout")
 
-    self.database = LibStub("AceDB-3.0"):New("DynamicGroupLayoutDB", defaults, true)
     self.events = {}
     self.locked = false
     self.lockedFrames = {}
