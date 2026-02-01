@@ -295,6 +295,16 @@ end
 -- Layouts
 --------------------------------------------------------------------------------
 
+function Layouts:Notify(layout)
+    local name = self.layouts.layouts[layout]
+        and self.layouts.layouts[layout].layoutName
+        or "Unknown Layout"
+
+    DEFAULT_CHAT_FRAME:AddMessage(
+        "|cff00ffccDynamicGroupLayout|r: Layout changed a |cffffff00" .. name .. "|r"
+    )
+end
+
 function Layouts:Enable()
     Layouts:Update()
 
@@ -330,9 +340,14 @@ function Layouts:Update()
 end
 
 function Layouts:Activate(layout)
+    if layout == self.activeLayout then
+        return
+    end
+
     if self:Has(layout) then
         C_EditMode.SetActiveLayout(layout)
         self.activeLayout = layout
+        self:Notify(layout)
     end
 end
 
