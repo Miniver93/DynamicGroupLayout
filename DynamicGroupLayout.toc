@@ -1,9 +1,12 @@
-## Interface: 120000
+## Interface: 120000, 120001
 ## Title: DynamicGroupLayout
+## Notes: Dynamic Group Layout
 ## Version: 1.0.0
 ## Author: Miniver93
 ## SavedVariables: DGLDB
-## Dependencies: Ace3
+## X-Category: Interface Enhancements
+
+## OptionalDeps: Ace3
 
 Libs\LibStub\LibStub.lua
 Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
