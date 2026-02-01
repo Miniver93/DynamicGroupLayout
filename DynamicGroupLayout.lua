@@ -155,7 +155,7 @@ end
 --------------------------------------------------------------------------------
 
 function DynamicGroupLayout:ConfirmReload()
-    return "This action will reload the DynamicGroupLayout"
+    return "This action will reload the UI"
 end
 
 function DynamicGroupLayout:Event(event, callback)
