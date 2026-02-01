@@ -94,6 +94,18 @@ local options = {
             set = function(info, value)
                 DynamicGroupLayout:SetOption("group40Layout", value)
             end
+        },
+        notify = {
+            name = "Notify layout changes",
+            type = "toggle",
+            width = "full",
+            order = 5,
+            get = function()
+                return DynamicGroupLayout:GetOption("notify")
+            end,
+            set = function(info, value)
+                DynamicGroupLayout:SetOption("notify", value)
+            end
         }
     }
 }
@@ -107,6 +119,7 @@ local defaults = {
         group10Layout = 0,
         group25Layout = 0,
         group40Layout = 0,
+        notify = true
     }
 }
 
@@ -295,13 +308,28 @@ end
 -- Layouts
 --------------------------------------------------------------------------------
 
+Layouts.throttleTime = 0.5
+Layouts.lastChange = 0
+
+function Layouts:CanChange()
+    local now = GetTime()
+    if now - self.lastChange < self.throttleTime then
+        return false
+    end
+    self.lastChange = now
+    return true
+end
+
 function Layouts:Notify(layout)
-    local name = self.layouts.layouts[layout]
-        and self.layouts.layouts[layout].layoutName
-        or "Unknown Layout"
+    if not DynamicGroupLayout:GetOption("notify") then
+        return
+    end
+
+    local info = self.layouts.layouts[layout]
+    local name = info and info.layoutName or "Unknown Layout"
 
     DEFAULT_CHAT_FRAME:AddMessage(
-        "|cff00ffccDynamicGroupLayout|r: Layout changed a |cffffff00" .. name .. "|r"
+        "|cff00ffccDynamicGroupLayout|r: Layout changed to |cffffff00" .. name .. "|r"
     )
 end
 
@@ -386,6 +414,9 @@ function Layouts:List()
 end
 
 function Layouts:Evaluate(event, ...)
+    if not self:CanChange() then
+        return
+    end
     local newLayout = self.defaultLayout
 
     if IsInGroup() or IsInRaid() then
